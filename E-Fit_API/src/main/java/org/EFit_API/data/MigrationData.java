@@ -1,23 +1,32 @@
 package org.EFit_API.data;
 
-import org.EFit_API.entity.Exercise;
-import org.EFit_API.entity.MuscularGroup;
-import org.EFit_API.entity.User;
-import org.EFit_API.repository.ExerciseRepository;
-import org.EFit_API.repository.UserRepository;
+import org.EFit_API.entity.*;
+import org.EFit_API.repository.*;
 import org.springframework.context.ApplicationContext;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class MigrationData {
 
     UserRepository userR;
     ExerciseRepository exerciseR;
+    RoutineRepository routineR;
+    ExerciseRoutineRepository exerciseRoutineR;
+    ScoreRepository scoreR;
 
     public MigrationData(ApplicationContext context) {
         this.userR = (UserRepository) context.getBean("userRepository");
         this.exerciseR = (ExerciseRepository) context.getBean("exerciseRepository");
+        this.routineR = (RoutineRepository) context.getBean("routineRepository");
+        this.exerciseRoutineR = (ExerciseRoutineRepository) context.getBean("exerciseRoutineRepository");
+        this.scoreR = (ScoreRepository) context.getBean("scoreRepository");
+
+
+
         this.loadData();
     }
 
@@ -29,7 +38,8 @@ public class MigrationData {
         if(exerciseR.findAll().isEmpty())
             exerciseR.saveAll(loadExercises());
         //Entrenamientos de prueba
-        loadDemoData();//Sin hacer
+        if(exerciseRoutineR.findAll().isEmpty())
+            loadDemoData();
     }
 
     public Set<Exercise> loadExercises() {
@@ -98,8 +108,88 @@ public class MigrationData {
     }
 
     public void loadDemoData(){
-        //Rutinas
-        //Exercises-Routines
-        //Scores
+        // Obtengo el usuario
+        User user = userR.findAll().get(0);
+        if(user!= null && routineR.findAll().isEmpty()){
+            // Creo las rutinas
+            Routine r1 = new Routine("Push", "1:30", 1, "Rutina de empujes", true, user);
+            Routine r2 = new Routine("Pull", "1:40", 2, "Rutina de tracciones", true, user);
+            Routine r3 = new Routine("Arms", "1:15", 3, "Rutina de brazo", true, user);
+            Routine r4 = new Routine("Legs", "2:00", 4, "Rutina de pierna", true, user);
+            routineR.save(r1);
+            routineR.save(r2);
+            routineR.save(r3);
+            routineR.save(r4);
+            // Asigno ejercicios a las rutinas
+            List<Exercise> exercises = exerciseR.findAll();
+            try {
+                // RUTINA 1
+                addExerciseRoutineAndScores(exercises, r1, 1,"Fondos", 3, ExerciseType.LIBRE, user, "[50*12/50*10/50*8]");
+                addExerciseRoutineAndScores(exercises, r1, 2,"Press banca", 4, ExerciseType.BARRA, user, "[60*10/60*8/60*8/55*10]");
+                addExerciseRoutineAndScores(exercises, r1, 3,"Press inclinado", 5, ExerciseType.MANCUERNAS, user, "[40*12/40*10/40*10/40*8/35*12]");
+                addExerciseRoutineAndScores(exercises, r1, 4,"Cables cruzados", 5, ExerciseType.POLEA, user, "[30*15/30*12/30*12/30*10/25*15]");
+
+                // RUTINA 2
+                addExerciseRoutineAndScores(exercises, r2, 1,"Dominadas", 5, ExerciseType.LIBRE, user, "[0*10/0*8/10*4]");
+                addExerciseRoutineAndScores(exercises, r2, 2,"Jalón", 5, ExerciseType.LIBRE, user, "[70*10/70*8/70*8/70*8/65*10]");
+                addExerciseRoutineAndScores(exercises, r2, 3,"Remo", 5, ExerciseType.LIBRE, user, "[60*12/60*10/60*10/60*8/55*12]");
+                addExerciseRoutineAndScores(exercises, r2, 4,"Remo unilateral", 5, ExerciseType.LIBRE, user, "[50*10/50*8/50*8/50*8/45*10]");
+                addExerciseRoutineAndScores(exercises, r2, 5,"Pullover", 5, ExerciseType.LIBRE, user, "[40*12/40*10/40*10/40*8/35*12]");
+                addExerciseRoutineAndScores(exercises, r2, 6,"Facepull", 5, ExerciseType.LIBRE, user, "[30*15/30*12/30*12/30*10/25*15]");
+
+                // RUTINA 3
+                addExerciseRoutineAndScores(exercises, r3, 1,"Curl Predicador", 4, ExerciseType.BARRA, user, "[30*12/30*10/30*10/25*12]");
+                addExerciseRoutineAndScores(exercises, r3, 2,"Curl martillo", 4, ExerciseType.LIBRE, user, "[20*15/20*12/20*12/20*10]");
+                addExerciseRoutineAndScores(exercises, r3, 3,"Curl inclinado", 4, ExerciseType.LIBRE, user, "[25*12/25*10/25*10/20*12]");
+                addExerciseRoutineAndScores(exercises, r3, 4,"Patada de tríceps", 4, ExerciseType.LIBRE, user, "[35*10/35*8/35*8/30*10]");
+                addExerciseRoutineAndScores(exercises, r3, 5,"Pushdowns de tríceps", 4, ExerciseType.POLEA, user, "[40*12/40*10/40*10/35*12]");
+                addExerciseRoutineAndScores(exercises, r3, 6,"Extensión de tríceps", 4, ExerciseType.POLEA, user, "[30*15/30*12/30*12/25*15]");
+
+                // RUTINA 4
+                addExerciseRoutineAndScores(exercises, r4, 1,"Prensa inclinada", 5, ExerciseType.MÁQUINA, user, "[80*10/80*8/80*8/80*8/75*10]");
+                addExerciseRoutineAndScores(exercises, r4, 2,"Extensión de quádriceps", 4, ExerciseType.MÁQUINA, user, "[70*12/70*10/70*10/65*12]");
+                addExerciseRoutineAndScores(exercises, r4, 3,"Curl femoral tumbado", 4, ExerciseType.MÁQUINA, user, "[60*12/60*10/60*10/55*12]");
+                addExerciseRoutineAndScores(exercises, r4, 4,"Abductores", 3, ExerciseType.MÁQUINA, user, "[50*15/50*12/50*12]");
+                addExerciseRoutineAndScores(exercises, r4, 5,"Adductores", 3, ExerciseType.MÁQUINA, user, "[50*15/50*12/50*12]");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void addExerciseRoutineAndScores(List<Exercise> exercises, Routine routine, int ordered, String exerciseName, int sets, ExerciseType type, User user, String load) {
+        Exercise exercise = exercises.stream()
+                .filter(e -> e.getName().equals(exerciseName))
+                .findFirst()
+                .orElse(null);
+
+        if (exercise != null) {
+            // Generar la fecha dentro de la función
+            LocalDate date = LocalDate.now();
+
+            // Crear una lista de SetType según el número de sets
+            List<SetType> setTypes = new ArrayList<>();
+            for (int i = 0; i < sets - 1; i++) {
+                setTypes.add(SetType.STANDARD); // Añadir sets estándar
+            }
+            setTypes.add(SetType.DROP);
+
+            // Guardar el ejercicio en la rutina
+            ExerciseRoutine exerciseRoutine = new ExerciseRoutine(
+                    exercise,
+                    routine,
+                    sets,
+                    100L,
+                    0,
+                    type,
+                    ordered,
+                    setTypes
+            );
+            exerciseRoutineR.save(exerciseRoutine);
+
+            // Guardar la puntuación asociada
+            Score score = new Score(user, exercise, routine, date, "Comentarios de prueba", load);
+            scoreR.save(score);
+        }
     }
 }
