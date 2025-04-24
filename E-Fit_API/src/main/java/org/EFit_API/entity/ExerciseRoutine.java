@@ -1,5 +1,7 @@
 package org.EFit_API.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,10 +17,12 @@ public class ExerciseRoutine {
 
     @ManyToOne
     @JoinColumn(name = "exercise_id", nullable = false)
+    @JsonBackReference
     private Exercise exercise;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "routine_id", nullable = false)
+    @JsonBackReference
     private Routine routine;
 
     @Column(nullable = false, name = "n_sets")
