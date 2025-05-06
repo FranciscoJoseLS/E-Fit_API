@@ -22,7 +22,7 @@ public class ExerciseRoutine {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "routine_id", nullable = false)
-    @JsonBackReference("routines-exercises")
+    @JsonBackReference("routine-exercises")
     private Routine routine;
 
     @Column(nullable = false, name = "n_sets")

@@ -33,7 +33,7 @@ public class MigrationData {
             userR.save(new User("Fran", "López", "wiamfran@gmail.com", "1234"));
         if(exerciseR.findAll().isEmpty())
             exerciseR.saveAll(loadExercises());
-        if(exerciseRoutineR.findAll().isEmpty())
+        if(routineR.findAll().isEmpty())
             loadDemoData();
     }
 
