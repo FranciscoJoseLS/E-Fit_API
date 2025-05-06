@@ -26,11 +26,11 @@ public class Exercise {
     private String description;
 
     @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonBackReference("exercise-routines")
     private Set<ExerciseRoutine> exerciseRoutines = new HashSet<>();
 
     @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonBackReference("exercise-scores")
     private Set<Score> scores = new HashSet<>();
 
     public Exercise() {}

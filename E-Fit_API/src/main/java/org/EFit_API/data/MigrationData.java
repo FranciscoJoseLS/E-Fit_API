@@ -25,19 +25,14 @@ public class MigrationData {
         this.exerciseRoutineR = (ExerciseRoutineRepository) context.getBean("exerciseRoutineRepository");
         this.scoreR = (ScoreRepository) context.getBean("scoreRepository");
 
-
-
         this.loadData();
     }
 
     private void loadData() {
-        userR.deleteAll();
         if(userR.findAll().isEmpty())
             userR.save(new User("Fran", "López", "wiamfran@gmail.com", "1234"));
-        //Basic Exercises
         if(exerciseR.findAll().isEmpty())
             exerciseR.saveAll(loadExercises());
-        //Entrenamientos de prueba
         if(exerciseRoutineR.findAll().isEmpty())
             loadDemoData();
     }

@@ -39,11 +39,11 @@ public class Routine {
     private User user;
 
     @OneToMany(mappedBy = "routine", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonManagedReference("routine-exercises")
     private Set<ExerciseRoutine> exerciseRoutines = new HashSet<>();
 
     @OneToMany(mappedBy = "routine", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonBackReference("routine-scores")
     private Set<Score> scores = new HashSet<>();
 
     public Routine() {}

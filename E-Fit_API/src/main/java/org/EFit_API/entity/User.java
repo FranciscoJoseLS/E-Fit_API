@@ -31,12 +31,12 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("routines")
-    @JsonBackReference
+    @JsonBackReference("user-routines")
     private Set<Routine> routines = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("scores")
-    @JsonBackReference
+    @JsonBackReference("routines-user")
     private Set<Score> scores = new HashSet<>();
 
     public User() {}

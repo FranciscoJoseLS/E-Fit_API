@@ -17,17 +17,17 @@ public class Score {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
+    @JsonBackReference("user-scores")
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "exercise_id", nullable = false)
-    @JsonBackReference
+    @JsonBackReference("exercise-scores")
     private Exercise exercise;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "routine_id", nullable = false)
-    @JsonBackReference
+    @JsonBackReference("routine-scores")
     private Routine routine;
 
     @Column(name = "realization_date", nullable = false)
