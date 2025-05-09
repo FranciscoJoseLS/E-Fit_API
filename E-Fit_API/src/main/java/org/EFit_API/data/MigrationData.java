@@ -106,6 +106,7 @@ public class MigrationData {
         // Obtengo el usuario
         User user = userR.findAll().get(0);
         if(user!= null && routineR.findAll().isEmpty()){
+            routineR.deleteAll();
             // Creo las rutinas
             Routine r1 = new Routine("Push", "1:30", 1, "Rutina de empujes", true, user);
             Routine r2 = new Routine("Pull", "1:40", 2, "Rutina de tracciones", true, user);
