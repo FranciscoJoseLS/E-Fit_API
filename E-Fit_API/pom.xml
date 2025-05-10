@@ -68,7 +68,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>org.EFit_API.EFitApiApplication</mainClass>
+                    <mainClass>org.EFit_API.App</mainClass>
                 </configuration>
                 <executions>
                     <execution>
