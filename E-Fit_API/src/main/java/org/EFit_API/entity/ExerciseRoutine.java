@@ -15,9 +15,9 @@ public class ExerciseRoutine {
     @Column(name = "exercise_routine_id")
     private UUID exerciseRoutineId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "exercise_id", nullable = false)
-    @JsonBackReference("exercise-routines")
+    @JsonManagedReference("exercise-routines")
     private Exercise exercise;
 
     @ManyToOne(fetch = FetchType.LAZY)
