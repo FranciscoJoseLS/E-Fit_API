@@ -65,4 +65,10 @@ public class RoutineServiceImpl implements RoutineService {
     public List<Routine> findByUserAndDefaultDaysBetween(User user, Integer startDays, Integer endDays) {
         return routineRepository.findByUserAndDefaultDaysBetween(user, startDays, endDays);
     }
+
+    @Override
+    public Optional<Routine> findById(UUID id) {
+        return routineRepository.findById(id);
+    }
+
 }

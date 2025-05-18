@@ -21,6 +21,7 @@ org/EFit_API/controller/ScoreController.class
 org/EFit_API/entity/User.class
 org/EFit_API/repository/ExerciseRepository.class
 org/EFit_API/service/ExerciseRoutineService.class
+org/EFit_API/entity/ExerciseRoutineDTO.class
 org/EFit_API/controller/UserController.class
 org/EFit_API/service/UserService.class
 org/EFit_API/repository/ScoreRepository.class

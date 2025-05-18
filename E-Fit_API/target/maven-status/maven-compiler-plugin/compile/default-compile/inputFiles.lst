@@ -7,6 +7,7 @@
 /home/bxy/Escritorio/ProyectoDAM/E-Fit_BackEnd/E-Fit_API/src/main/java/org/EFit_API/data/MigrationData.java
 /home/bxy/Escritorio/ProyectoDAM/E-Fit_BackEnd/E-Fit_API/src/main/java/org/EFit_API/entity/Exercise.java
 /home/bxy/Escritorio/ProyectoDAM/E-Fit_BackEnd/E-Fit_API/src/main/java/org/EFit_API/entity/ExerciseRoutine.java
+/home/bxy/Escritorio/ProyectoDAM/E-Fit_BackEnd/E-Fit_API/src/main/java/org/EFit_API/entity/ExerciseRoutineDTO.java
 /home/bxy/Escritorio/ProyectoDAM/E-Fit_BackEnd/E-Fit_API/src/main/java/org/EFit_API/entity/ExerciseType.java
 /home/bxy/Escritorio/ProyectoDAM/E-Fit_BackEnd/E-Fit_API/src/main/java/org/EFit_API/entity/MuscularGroup.java
 /home/bxy/Escritorio/ProyectoDAM/E-Fit_BackEnd/E-Fit_API/src/main/java/org/EFit_API/entity/Routine.java

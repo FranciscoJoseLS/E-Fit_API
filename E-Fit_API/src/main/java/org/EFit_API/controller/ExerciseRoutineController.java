@@ -1,10 +1,9 @@
 package org.EFit_API.controller;
 
-import org.EFit_API.entity.ExerciseRoutine;
-import org.EFit_API.entity.Routine;
-import org.EFit_API.entity.Exercise;
-import org.EFit_API.entity.User;
+import org.EFit_API.entity.*;
 import org.EFit_API.service.ExerciseRoutineServiceImpl;
+import org.EFit_API.service.ExerciseService;
+import org.EFit_API.service.RoutineService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +16,13 @@ import java.util.UUID;
 public class ExerciseRoutineController {
 
     private final ExerciseRoutineServiceImpl service;
+    private final ExerciseService exerciseService;
+    private final RoutineService routineService;
 
-    public ExerciseRoutineController(ExerciseRoutineServiceImpl service) {
+    public ExerciseRoutineController(ExerciseRoutineServiceImpl service, ExerciseService exerciseService, RoutineService routineService) {
         this.service = service;
+        this.exerciseService = exerciseService;
+        this.routineService = routineService;
     }
 
     /*
@@ -49,10 +52,30 @@ public class ExerciseRoutineController {
      * Crea una nueva ExerciseRoutine.
      */
     @PostMapping("/")
-    public ResponseEntity<ExerciseRoutine> createExerciseRoutine(@RequestBody ExerciseRoutine exerciseRoutine) {
+    public ResponseEntity<ExerciseRoutine> createExerciseRoutine(@RequestBody ExerciseRoutineDTO exerciseRoutineDTO) {
+        ExerciseRoutine exerciseRoutine = convertToEntity(exerciseRoutineDTO);
         ExerciseRoutine savedExerciseRoutine = service.save(exerciseRoutine);
         if (savedExerciseRoutine == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.status(201).body(savedExerciseRoutine);
+    }
+
+    private ExerciseRoutine convertToEntity(ExerciseRoutineDTO exerciseRoutineDTO) {
+        Exercise exercise = exerciseService.findById(exerciseRoutineDTO.getExerciseId())
+                .orElseThrow(() -> new RuntimeException("Exercise not found"));
+        Routine routine = routineService.findById(exerciseRoutineDTO.getRoutineId())
+                .orElseThrow(() -> new RuntimeException("Routine not found"));
+
+        ExerciseRoutine exerciseRoutine = new ExerciseRoutine();
+        exerciseRoutine.setExercise(exercise);
+        exerciseRoutine.setRoutine(routine);
+        exerciseRoutine.setnSets(exerciseRoutineDTO.getnSets());
+        exerciseRoutine.setSetTypes(exerciseRoutineDTO.getSetTypes());
+        exerciseRoutine.setRest(exerciseRoutineDTO.getRest());
+        exerciseRoutine.setSuperSerie(exerciseRoutineDTO.getSuperSerie());
+        exerciseRoutine.setExerciseType(exerciseRoutineDTO.getExerciseType());
+        exerciseRoutine.setOrdered(exerciseRoutineDTO.getOrdered());
+
+        return exerciseRoutine;
     }
 
     /*

@@ -17,4 +17,5 @@ public interface RoutineService {
     boolean existsByUserAndName(User user, String name);
     List<Routine> findByUserAndNameContainingIgnoreCaseAndActive(User user, String name, Boolean active);
     List<Routine> findByUserAndDefaultDaysBetween(User user, Integer startDays, Integer endDays);
+    Optional<Routine> findById(UUID routineId);
 }
