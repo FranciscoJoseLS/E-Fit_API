@@ -101,8 +101,7 @@ public class ExerciseRoutineController {
         Routine routine = new Routine();
         routine.setRoutineId(routineId);
         List<ExerciseRoutine> exerciseRoutines = service.findByRoutine(routine);
-        if (exerciseRoutines.isEmpty()) return ResponseEntity.noContent().build();
-        else return ResponseEntity.ok(exerciseRoutines);
+        return ResponseEntity.ok(exerciseRoutines);
     }
 
     /*
