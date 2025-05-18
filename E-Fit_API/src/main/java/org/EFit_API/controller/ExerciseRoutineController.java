@@ -98,27 +98,28 @@ public class ExerciseRoutineController {
      * Encuentra las ExerciseRoutines asociadas a una Routine específica.
      */
     @GetMapping("/routine/{routineId}")
-    public ResponseEntity<List<Object>> findByRoutineWithExercises(@PathVariable UUID routineId) {
+    public ResponseEntity<List<RoutineExerciseDTO>> findByRoutine(@PathVariable UUID routineId) {
         Routine routine = new Routine();
         routine.setRoutineId(routineId);
         List<ExerciseRoutine> exerciseRoutines = service.findByRoutine(routine);
 
-        List<Object> responseList = exerciseRoutines.stream()
+        List<RoutineExerciseDTO> responseList = exerciseRoutines.stream()
                 .map(er -> {
                     Exercise exercise = er.getExercise();
-                    return new Object() {
-                        public UUID exerciseRoutineId = er.getExerciseRoutineId();
-                        public Integer nSets = er.getnSets();
-                        public List<String> setTypes = er.getSetTypes() != null ? er.getSetTypes().stream().map(Enum::name).collect(Collectors.toList()) : null;
-                        public Long rest = er.getRest();
-                        public int superSerie = er.getSuperSerie();
-                        public String exerciseType = er.getExerciseType().name();
-                        public int ordered = er.getOrdered();
-                        public Long exerciseId = exercise.getExerciseId();
-                        public String name = exercise.getName();
-                        public String description = exercise.getDescription();
-                        public String muscularGroup = exercise.getMuscularGroup().name();
-                    };
+                    return new RoutineExerciseDTO(
+                            er.getExerciseRoutineId(),
+                            er.getnSets(),
+                            er.getSetTypes() != null ? er.getSetTypes().stream().map(Enum::name).collect(Collectors.toList()) : null,
+                            er.getRest(),
+                            er.getSuperSerie(),
+                            er.getExerciseType().name(),
+                            er.getOrdered(),
+                            exercise.getExerciseId(),
+                            exercise.getName(),
+                            exercise.getDescription(),
+                            exercise.getMuscularGroup().name()
+                            // Añade aquí otros campos de Exercise que necesites
+                    );
                 })
                 .collect(Collectors.toList());
 

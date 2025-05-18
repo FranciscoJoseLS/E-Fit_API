@@ -8,7 +8,6 @@ org/EFit_API/repository/RoutineRepository.class
 org/EFit_API/service/ScoreService.class
 org/EFit_API/controller/ExerciseRoutineController.class
 org/EFit_API/repository/ExerciseRoutineRepository.class
-org/EFit_API/controller/ExerciseRoutineController$1.class
 org/EFit_API/entity/Score.class
 org/EFit_API/service/ExerciseService.class
 org/EFit_API/repository/UserRepository.class
@@ -24,6 +23,7 @@ org/EFit_API/repository/ExerciseRepository.class
 org/EFit_API/service/ExerciseRoutineService.class
 org/EFit_API/entity/ExerciseRoutineDTO.class
 org/EFit_API/controller/UserController.class
+org/EFit_API/entity/RoutineExerciseDTO.class
 org/EFit_API/service/UserService.class
 org/EFit_API/repository/ScoreRepository.class
 org/EFit_API/service/ExerciseRoutineServiceImpl.class
