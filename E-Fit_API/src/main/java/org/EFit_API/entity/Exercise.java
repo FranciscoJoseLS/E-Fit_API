@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,8 +28,8 @@ public class Exercise {
     private String description;
 
     @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonBackReference("exercise-routines")
-    private Set<ExerciseRoutine> exerciseRoutines = new HashSet<>();
+    @JsonManagedReference("exercise-routines")
+    private List<ExerciseRoutine> exerciseRoutines = new ArrayList<>();
 
     @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonBackReference("exercise-scores")
@@ -72,11 +74,11 @@ public class Exercise {
         this.description = description;
     }
 
-    public Set<ExerciseRoutine> getExerciseRoutines() {
+    public List<ExerciseRoutine> getExerciseRoutines() {
         return exerciseRoutines;
     }
 
-    public void setExerciseRoutines(Set<ExerciseRoutine> exerciseRoutines) {
+    public void setExerciseRoutines(List<ExerciseRoutine> exerciseRoutines) {
         this.exerciseRoutines = exerciseRoutines;
     }
 

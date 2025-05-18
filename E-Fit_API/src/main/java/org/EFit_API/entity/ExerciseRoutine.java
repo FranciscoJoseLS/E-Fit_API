@@ -17,7 +17,7 @@ public class ExerciseRoutine {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "exercise_id", nullable = false)
-    @JsonManagedReference("exercise-routines")
+    @JsonBackReference("exercise-routines")
     private Exercise exercise;
 
     @ManyToOne(fetch = FetchType.LAZY)
