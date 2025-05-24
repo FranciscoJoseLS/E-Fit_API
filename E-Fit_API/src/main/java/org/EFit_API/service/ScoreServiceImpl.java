@@ -70,9 +70,6 @@ public class ScoreServiceImpl implements ScoreService {
         return this.repository.findByExerciseAndRoutine(exercise, routine);
     }
 
-
-
-
     @Override
     public List<Score> findByRoutineAndUserAndRealizationDateBetween(Routine routine, User user, LocalDate startDate, LocalDate endDate) {
         return repository.findByRoutineAndUserAndRealizationDateBetween(routine, user, startDate, endDate);

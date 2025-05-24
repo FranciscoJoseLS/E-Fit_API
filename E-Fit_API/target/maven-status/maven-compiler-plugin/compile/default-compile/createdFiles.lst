@@ -28,5 +28,6 @@ org/EFit_API/service/UserService.class
 org/EFit_API/repository/ScoreRepository.class
 org/EFit_API/service/ExerciseRoutineServiceImpl.class
 org/EFit_API/entity/Exercise.class
+org/EFit_API/entity/ScoreDTO.class
 org/EFit_API/entity/ExerciseRoutine.class
 org/EFit_API/service/RoutineService.class

@@ -1,12 +1,17 @@
 package org.EFit_API.controller;
 
 import org.EFit_API.entity.Score;
+import org.EFit_API.entity.ScoreDTO;
 import org.EFit_API.entity.User;
 import org.EFit_API.entity.Routine;
 import org.EFit_API.entity.Exercise;
 import org.EFit_API.service.ScoreServiceImpl;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -173,4 +178,45 @@ public class ScoreController {
         if (scores.isEmpty()) return ResponseEntity.noContent().build();
         else return ResponseEntity.ok(scores);
     }
+    
+    
+    @PostMapping("/new")
+    public ResponseEntity<Score> createScoreFromDTO(@RequestBody ScoreDTO scoreDTO) {
+        try {
+            UUID routineUuid = UUID.fromString(scoreDTO.getRoutineId());
+            UUID userUuid = UUID.fromString(scoreDTO.getUserId());
+
+            User user = new User();
+            user.setUserId(userUuid); 
+
+            Routine routine = new Routine();
+            routine.setRoutineId(routineUuid);
+
+            Exercise exercise = new Exercise();
+            exercise.setExerciseId(scoreDTO.getExerciseId());
+
+            Score score = new Score();
+            score.setExercise(exercise);      
+            score.setRoutine(routine);        
+            score.setUser(user);              
+            score.setComments(scoreDTO.getComment());
+            score.setLoadValue(scoreDTO.getLoad());
+            score.setRealizationDate(LocalDate.now());
+
+            Score savedScore = service.save(score);
+
+            if (savedScore == null) {
+                return ResponseEntity.badRequest().build();
+            }
+            return ResponseEntity.status(201).body(savedScore); // Return 201 Created status
+            
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null); 
+        } catch (DateTimeParseException e) {
+            return ResponseEntity.badRequest().body(null); 
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(null); // 500 Internal Server Error
+        }
+    }
+
 }

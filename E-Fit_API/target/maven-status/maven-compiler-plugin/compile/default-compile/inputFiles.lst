@@ -13,6 +13,7 @@
 /home/bxy/Escritorio/ProyectoDAM/E-Fit_BackEnd/E-Fit_API/src/main/java/org/EFit_API/entity/Routine.java
 /home/bxy/Escritorio/ProyectoDAM/E-Fit_BackEnd/E-Fit_API/src/main/java/org/EFit_API/entity/RoutineExerciseDTO.java
 /home/bxy/Escritorio/ProyectoDAM/E-Fit_BackEnd/E-Fit_API/src/main/java/org/EFit_API/entity/Score.java
+/home/bxy/Escritorio/ProyectoDAM/E-Fit_BackEnd/E-Fit_API/src/main/java/org/EFit_API/entity/ScoreDTO.java
 /home/bxy/Escritorio/ProyectoDAM/E-Fit_BackEnd/E-Fit_API/src/main/java/org/EFit_API/entity/SetType.java
 /home/bxy/Escritorio/ProyectoDAM/E-Fit_BackEnd/E-Fit_API/src/main/java/org/EFit_API/entity/User.java
 /home/bxy/Escritorio/ProyectoDAM/E-Fit_BackEnd/E-Fit_API/src/main/java/org/EFit_API/repository/ExerciseRepository.java

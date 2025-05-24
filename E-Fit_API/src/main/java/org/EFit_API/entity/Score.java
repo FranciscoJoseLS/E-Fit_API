@@ -3,7 +3,7 @@ package org.EFit_API.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-
+import java.time.LocalDateTime; 
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -89,6 +89,11 @@ public class Score {
         this.realizationDate = realizationDate;
     }
 
+    public void setRealizationDate() {
+        this.realizationDate = LocalDate.now();
+    }
+
+    
     public String getComments() {
         return comments;
     }
