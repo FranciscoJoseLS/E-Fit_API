@@ -13,6 +13,7 @@ public interface ScoreRepository extends JpaRepository<Score, UUID> {
     List<Score> findByUser(User user);
     List<Score> findByExercise(Exercise exercise);
     List<Score> findByUserAndRoutine(User user, Routine routine);
+    List<Score> findByUserAndExercise(User user, Exercise exercise);
     boolean existsByRoutineAndExercise(Routine routine, Exercise exercise);
     List<Score> findByExerciseAndRoutine(Exercise exercise, Routine routine);
     List<Score> findByRoutineAndUserAndRealizationDateBetween(Routine routine, User user, LocalDate startDate, LocalDate endDate);

@@ -89,9 +89,20 @@ public class ScoreController {
     }
 
     /*
-     * GET http://localhost:8080/score/user/{userId}
+     * GET http://localhost:8080/score/user/{userId}exercise{exerciseId}
      * Encuentra los Scores asociados a un User específico.
      */
+    @GetMapping("/user/{userId}/exercise/{exerciseId}")
+    public ResponseEntity<List<Score>> findByUserAndExercise(@PathVariable UUID userId,@PathVariable Long exerciseId) {
+        User user = new User();
+        user.setUserId(userId);
+        Exercise exercise = new Exercise();
+        exercise.setExerciseId(exerciseId);
+        List<Score> scores = service.findByUserAndExercise(user,exercise);
+        if (scores.isEmpty()) return ResponseEntity.noContent().build();
+        else return ResponseEntity.ok(scores);
+    }
+    
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Score>> findByUser(@PathVariable UUID userId) {
         User user = new User();

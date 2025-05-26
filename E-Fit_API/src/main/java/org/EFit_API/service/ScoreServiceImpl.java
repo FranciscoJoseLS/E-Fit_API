@@ -59,6 +59,11 @@ public class ScoreServiceImpl implements ScoreService {
     public List<Score> findByUserAndRoutine(User user, Routine routine) {
         return repository.findByUserAndRoutine(user, routine);
     }
+    
+    @Override
+    public List<Score> findByUserAndExercise(User user, Exercise exercise) {
+        return repository.findByUserAndExercise(user, exercise);
+    }
 
     @Override
     public boolean existsByRoutineAndExercise(Routine routine, Exercise exercise) {

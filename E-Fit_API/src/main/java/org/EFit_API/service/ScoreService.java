@@ -23,6 +23,8 @@ public interface ScoreService {
 
         //Encuentra Scores por Exercise y Routine
     List<Score> findByExerciseAndRoutine(Exercise exercise, Routine routine);
+    	//Encuentra Scores por Exercise y Routine
+    List<Score> findByUserAndExercise(User user, Exercise exercise);
         //Encuentra Scores por Routine, User y fecha entre un rango de fechas
     List<Score> findByRoutineAndUserAndRealizationDateBetween(Routine routine, User user, LocalDate startDate, LocalDate endDate);
 }
